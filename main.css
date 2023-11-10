@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  background-color: black;
+  user-select: none;
+}
+#doubleBar {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+}
+.bar {
+  height: 700px;
+  width: 100%;
+  overflow: scroll;
+  background-color: rgb(38, 35, 35);
+  color: white;
+  padding: 20px;
+}
+td {
+  padding: 10px;
+}
+tr:nth-child(odd) {
+  background-color: #3a3333;
+  color: #fff;
+}
+h1 {
+  padding: 20px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  height: 100px;
+}
+.container50 {
+  height: 50%;
+}
+#gameLogsContainer {
+  height: 320px;
+  overflow: scroll;
+  user-select: text;
+}
+#gameLogs {
+  width: 100%;
+}
+#gameLogs td {
+  user-select: all;
+}
+#workSpace button,
+#workSpace h3{
+    margin: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+}
+#workSpace h3{
+    height: 50px;
+}
+#smallButtonWorkspace{
+    height: 50px;
+}
+#largeButtonWorkspace{
+    height: 100px;
+}

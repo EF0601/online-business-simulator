@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Business Simulator</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="game">
+        <h1>Online Business Simulator</h1>
+        <div id="doubleBar">
+            <div class="bar">
+                <div class="container50">
+                    <h2>Work</h2><br>
+                    <div id="workSpace">
+                        <button id="smallButtonWorkspace" onclick="startShift()">Click to start new shift.</button><br>
+                        <button id="largeButtonWorkspace">Send order (+$<span id="moneyPerClick">1</span>)</button>
+                        <h3><span id="ordersLeft">15</span> orders out of <span id="maxOrders">30</span> orders</h3>
+                    </div>
+                </div>
+                <div class="container50">
+                    <h2>Game Logs</h2>
+                    <div id="gameLogsContainer">
+                        <table id="gameLogs">
+                            <tr>
+                                <td>Event</td>
+                            </tr>
+                        </table>
+                        <div type="text" id="gameLogsBottom"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bar">
+                <h2>Staff</h2>
+                <button>Buy new staff member (-$<span id="staffCost">10</span>)</button><br>
+                <button>Buy new floor (-$<span id="floorCost">500</span>)<br></button>
+                <h2>Website</h2>
+                <button>x1.04 website capacity. (Increase orders) $<span id="websiteCapacityUpgrade">300</span></button>
+                <button>Buy visual effects (2 megabytes)</button>
+                <button>Buy banner (3 megabytes)</button>
+                <h4>Usage: 45 megabytes/50 megabytes</h4>
+                <h4>Usage Breakdown</h4>
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td>Usage (mbs)</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>15 megabytes</td>
+                    </tr>
+                    <tr>
+                        <td>Orders</td>
+                        <td>30 megabytes</td>
+                    </tr>
+                    <tr>
+                        <td>Misc</td>
+                        <td>0 megabytes</td>
+                    </tr>
+                </table>
+                <h2>Upgrades</h2>
+
+                <table>
+                    <tr>
+                        <td>Upgrade</td>
+                        <td>Change</td>
+                        <td>Price</td>
+                    </tr>
+                    <tr>
+                        <td>Price Increase</td>
+                        <td>
+                            <div class="doubleColumn">
+                                <div class="container">
+                                    <h3>Level 0</h3>
+                                    <p>Earnings/click increase boost: 0%</p>
+                                    <p>Price: $0</p>
+                                </div>
+                                <div class="container">
+                                    <h3>Level 1</h3>
+                                    <p>Earnings/click increase boost: 1%</p>
+                                    <p>Price: $100</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>You pay: $109 <button>Buy</button></td>
+                    </tr>
+                    <tr>
+                        <td>Additional staff earnings boost</td>
+                        <td>
+                            <div class="doubleColumn">
+                                <div class="container">
+                                    <h3>Level 0</h3>
+                                    <p>Earnings from staff increase boost: 0%</p>
+                                    <p>Price: $0</p>
+                                </div>
+                                <div class="container">
+                                    <h3>Level 1</h3>
+                                    <p>Earnings from staff: 1%</p>
+                                    <p>Price: $100</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>You pay: $109 <button>Buy</button></td>
+                    </tr>
+                    <tr>
+                        <td>Basic Tax Relief (for earnings only)</td>
+                        <td>
+                            <div class="doubleColumn">
+                                <div class="container">
+                                    <h3>Level 0</h3>
+                                    <p>Tax relief: 0%</p>
+                                    <p>Price: $0</p>
+                                </div>
+                                <div class="container">
+                                    <h3>Level 1</h3>
+                                    <p>Tax relief: 1%</p>
+                                    <p>Price: $1000</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>You pay: $1090 <button>Buy</button></td>
+                    </tr>
+                </table>
+
+                <i>Transactions include 9% tax.</i>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+</html>
