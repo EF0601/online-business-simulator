@@ -17,7 +17,7 @@
                     <h2>Work</h2><br>
                     <div id="workSpace">
                         <button id="smallButtonWorkspace" onclick="startShift()">Click to start new shift.</button><br>
-                        <button id="largeButtonWorkspace">Send order (+$<span id="moneyPerClick">1</span>)</button>
+                        <button id="largeButtonWorkspace" onclick="work()">Send order (+$<span id="moneyPerClick">2</span>)</button>
                         <h3><span id="ordersLeft">15</span> orders out of <span id="maxOrders">30</span> orders</h3>
                     </div>
                 </div>
@@ -34,6 +34,25 @@
                 </div>
             </div>
             <div class="bar">
+                <h2>Office</h2>
+                <h3>Money: $<span id="money">10</span></h3>
+                <h3>Office level: <span id="officeLevel">0</span></h3>
+                <i>There is a x1.02 boost on earnings per office level, for a max of x2.00</i>
+                <div class="doubleColumn">
+                    <div class="container">
+                        <h3>Level 0</h3>
+                        <p>Office: 0%</p>
+                        <p>Price: $0</p>
+                    </div>
+                    <div class="container">
+                        <h3>Level 1</h3>
+                        <p>Office: +1</p>
+                        <p>Price: $500</p>
+                    </div>
+                </div>
+                <i>You pay $545</i>
+                <button>Buy</button>
+                <button></button>
                 <h2>Staff</h2>
                 <button>Buy new staff member (-$<span id="staffCost">10</span>)</button><br>
                 <button>Buy new floor (-$<span id="floorCost">500</span>)<br></button>

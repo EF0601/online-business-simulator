@@ -58,10 +58,19 @@ function tutorial(section) {
 }
 //actual game code
 let shiftTimeLeft = 5000;
+let working = false;
+let orders = 15;
+let ordersSent = 0;
+let maxOrders = 30;
+
+let money = 10;
+
+let orderRespawnRate = 500;
 
 const smallButtonWorkspace = document.getElementById("smallButtonWorkspace");
 
 function startShift() {
+    working = true;
     smallButtonWorkspace.disabled = true;
     smallButtonWorkspace.innerHTML = `${shiftTimeLeft / 1000}s left in shift!`;
     setTimeout(countdown, 1000);
@@ -77,6 +86,10 @@ function countdown(){
         smallButtonWorkspace.disabled = false;
         smallButtonWorkspace.innerHTML = `Click to start shift.`;
         shiftTimeLeft = 5000;
+        money = money + ordersSent * 2;
+        document.getElementById("money").innerHTML = money;
+        ordersSent = 0;
+        working = false;
         if (tutorialOn === true) {
             tutorial(3);
         }
@@ -85,3 +98,20 @@ function countdown(){
         setTimeout(countdown, 1000);
     }
 }
+
+function work() {
+    if (working == true && orders > 0) {
+        ordersSent++;
+        orders--;
+        document.getElementById("ordersLeft").innerHTML = orders;
+    }
+}
+
+function respawnOrder() {
+    if (orders < maxOrders) {
+        orders++;
+    }
+    setTimeout(respawnOrder, orderRespawnRate);
+    document.getElementById("ordersLeft").innerHTML = orders;
+}
+respawnOrder();
