@@ -14,13 +14,16 @@ function printNewLog(message) {
 }
 
 printNewLog("Loading window...");
+printNewLog("Don't worry. Shouldn't take long.");
 window.onload = function () {
     printNewLog("Loaded window!");
     printNewLog("1/1 assets loaded! Initiating game...");
     printNewLog("Game initiated!");
     printNewLog("Game started!");
-    tutorial(1);
 };
+document.getElementById("enableTutorial").addEventListener("click", function () {
+    tutorial(1);
+});
 let tutorialOn = false;
 function tutorial(section) {
     switch (section) {
@@ -33,7 +36,7 @@ function tutorial(section) {
                 if (dialogues.length >= 1) {
                     setTimeout(nextDialogue, 2500);
                 }
-                else{}
+                else { document.getElementById("smallButtonWorkspace").style.border = "5px solid yellow"; }
             }
             tutorialOn = true;
             break;
@@ -49,13 +52,18 @@ function tutorial(section) {
                 if (dialogues2.length >= 1) {
                     setTimeout(nextDialogue2, 2500);
                 }
-                else {tutorialOn = false;}
+                else { tutorialOn = false; }
             }
             break;
         default:
             break;
     }
 }
+
+function round(number) {
+    return Math.round(number * 1000) / 1000;
+}
+
 //actual game code
 let shiftTimeLeft = 5000;
 let working = false;
@@ -64,6 +72,8 @@ let ordersSent = 0;
 let maxOrders = 30;
 
 let money = 10;
+let tax = 0.15;
+let earningsPerOrder = 2;
 
 let orderRespawnRate = 500;
 
@@ -76,22 +86,30 @@ function startShift() {
     setTimeout(countdown, 1000);
     if (tutorialOn === true) {
         tutorial(2);
+        document.getElementById("smallButtonWorkspace").style.border = "none";
+        document.getElementById("largeButtonWorkspace").style.border = "5px solid yellow";
     }
 }
 
-function countdown(){
+function countdown() {
     shiftTimeLeft -= 1000;
     smallButtonWorkspace.innerHTML = `${shiftTimeLeft / 1000}s left in shift!`;
     if (shiftTimeLeft <= 0) {
+        //earnings
+        const earnings = round((1 - tax) * (ordersSent * earningsPerOrder));
+        money += earnings;
+        printNewLog(`You earned $${earnings}! This is calculated as: tax: ${tax * 100}%; orders sent: ${ordersSent}; earnings per order: ${earningsPerOrder}; Gross earnings: ${round(earningsPerOrder * ordersSent)}; Tax cost: ${round((earningsPerOrder * ordersSent) * tax)}; Total earnings: ${earnings}; You now have $${money}.`);
+        document.getElementById("money").innerHTML = money;
+        //reset
         smallButtonWorkspace.disabled = false;
         smallButtonWorkspace.innerHTML = `Click to start shift.`;
         shiftTimeLeft = 5000;
-        money = money + ordersSent * 2;
-        document.getElementById("money").innerHTML = money;
         ordersSent = 0;
         working = false;
+        //tutorial check
         if (tutorialOn === true) {
             tutorial(3);
+            document.getElementById("largeButtonWorkspace").style.border = "none";
         }
     }
     else {

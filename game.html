@@ -5,10 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Business Simulator</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/modal.css">
 </head>
 
 <body>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <h1>Tutorial?</h1>
+            <p>Do you want to view the tutorial? It will help you get a good start on the game and explain most of the mechanics of the game. If you wish not to view the tutorial, you can still view the wiki page. [coming soon!]</p>
+            <div>
+                <button id="enableTutorial" onclick="closeModal()">I'd like to view the tutorial</button>
+                <button onclick="closeModal()">I'm a veteran: no need!</button>
+            </div>
+        </div>
+
+    </div>
     <div id="game">
         <h1>Online Business Simulator</h1>
         <div id="doubleBar">
@@ -149,5 +164,6 @@
         </div>
     </div>
 </body>
-<script src="main.js"></script>
+<script src="./javascript/main.js"></script>
+<script src="./javascript/modal.js"></script>
 </html>
