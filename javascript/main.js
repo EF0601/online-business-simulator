@@ -75,7 +75,7 @@ let money = 10;
 let tax = 0.15;
 let earningsPerOrder = 2;
 
-let orderRespawnRate = 500;
+let orderRespawnRate = 1000;
 
 const smallButtonWorkspace = document.getElementById("smallButtonWorkspace");
 
