@@ -71,13 +71,43 @@ let orders = 15;
 let ordersSent = 0;
 let maxOrders = 30;
 
+//monetary
 let money = 10;
 let tax = 0.15;
 let earningsPerOrder = 2;
 
+//experience
+let experience = 0;
+let maxExperience = 50;
+let level = 1;
+
+//staff
+let floors = {
+  numberFloors: 0,
+};
+
+let staffPrices = {
+    staff: 10,
+    floor: 500,
+};
+
 let orderRespawnRate = 1000;
 
 const smallButtonWorkspace = document.getElementById("smallButtonWorkspace");
+
+function gainedExperience() {
+    document.getElementById("experience").innerHTML = round(experience);
+    document.getElementById("experienceNeeded").innerHTML = round(maxExperience);
+    document.getElementById("officeLevel").innerHTML = level;
+    if (experience >= maxExperience) {
+        experience = 0;
+        level++;
+        maxExperience = Math.round(maxExperience * 1.5);
+        document.getElementById("experience").innerHTML = round(experience);
+        document.getElementById("experienceNeeded").innerHTML = Math.round(maxExperience);
+        printNewLog(`You leveled up! You are now level ${level}!`);
+    }
+}
 
 function startShift() {
     working = true;
@@ -122,6 +152,9 @@ function work() {
         ordersSent++;
         orders--;
         document.getElementById("ordersLeft").innerHTML = orders;
+        experience += round(Math.abs(Math.random()));
+        document.getElementById("experience").innerHTML = round(experience);
+        gainedExperience();
     }
 }
 
@@ -133,3 +166,30 @@ function respawnOrder() {
     document.getElementById("ordersLeft").innerHTML = orders;
 }
 respawnOrder();
+
+
+//hire staff/floor
+function buildFloor() {
+    if(money >= staffPrices.floor) {
+        money -= staffPrices.floor;
+        floors.numberFloors++;
+        staffPrices.floor = Math.round(staffPrices.floor * 1.5);
+        document.getElementById("floorPrice").innerHTML = staffPrices.floor;
+        document.getElementById("money").innerHTML = money;
+        floors[floors.numberFloors] = [staffNumber = 0, staffMax = 4, upgrade = 0, upgradeMax = 5];
+        console.log(floors);
+        printNewLog(`You bought a floor! You now have ${floors.numberFloors} floors!`);
+    }
+}
+
+function hireStaff() {
+    if (money >= 100) {
+        money -= 100;
+        floors.floors++;
+        document.getElementById("money").innerHTML = money;
+        printNewLog(`You hired a staff member! You now have ${floors.floors} staff members!`);
+    }
+    else {
+        printNewLog("You don't have enough money to hire a staff member!");
+    }
+}
