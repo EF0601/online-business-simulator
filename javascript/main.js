@@ -176,20 +176,46 @@ function buildFloor() {
         staffPrices.floor = Math.round(staffPrices.floor * 1.5);
         document.getElementById("floorPrice").innerHTML = staffPrices.floor;
         document.getElementById("money").innerHTML = money;
-        floors[floors.numberFloors] = [staffNumber = 0, staffMax = 4, upgrade = 0, upgradeMax = 5];
+        floors[floors.numberFloors] = {staffNumber: 0, staffMax: 4, upgrade: 0, upgradeMax: 5};
         console.log(floors);
         printNewLog(`You bought a floor! You now have ${floors.numberFloors} floors!`);
+    }
+    else{
+        printNewLog("You don't have enough money to buy another floor!");
     }
 }
 
 function hireStaff() {
-    if (money >= 100) {
-        money -= 100;
-        floors.floors++;
-        document.getElementById("money").innerHTML = money;
-        printNewLog(`You hired a staff member! You now have ${floors.floors} staff members!`);
+    let success = false;
+    if (floors == {numberFloors: 0}) {
+        printNewLog("You don't have any floors! Buy a floor first!");
+        success = true;
     }
-    else {
-        printNewLog("You don't have enough money to hire a staff member!");
+    else{
+        for (let i = 1; i <= floors.numberFloors; i++) {
+            console.log(i);
+            console.log(floors[i]);
+            if (floors[i].staffNumber < floors[i].staffMax) {
+                if (money >= staffPrices.staff) {
+                    money -= staffPrices.staff;
+                    staffPrices.staff = Math.round(staffPrices.staff * 1.15);
+                    document.getElementById("staffPrice").innerHTML = staffPrices.staff;
+                    document.getElementById("money").innerHTML = money;
+                    floors[i].staffNumber++;
+                    printNewLog(`You hired a staff member! You now have ${floors[i].staffNumber} staff members on floor ${i}!`);
+                    success = true;
+                }
+                else {
+                    printNewLog("You don't have enough money to hire a staff member!");
+                    success = true;
+                }
+            }
+            else { }
+        }
     }
+    if (success == false) {
+        // printNewLog("Error: LN188, COL1 main.js. Root: hireStaff(); Root two: ClickElement at LN61, COL38 at game.html. No resolution found. Error code: L188C1MAIN.JSL61C38GAME.HTML");
+        // printNewLog("Notice! This project is marked as 'beta' and is unfinished. Reporting the error will be beneficial to further development.");
+    }
+
 }
