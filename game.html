@@ -25,7 +25,7 @@
 
     </div>
     <div id="game">
-        <h1>Online Business Simulator</h1>
+        <h1>On<span id="hackedClientActivator">l</span>ine Business Simulator</h1>
         <div id="doubleBar">
             <div class="bar">
                 <div class="container50">
@@ -45,6 +45,12 @@
                             </tr>
                         </table>
                         <div type="text" id="gameLogsBottom"></div>
+                    </div>
+                    <div id="gameLogsCommands">
+                        <div class="group">
+                            /<input type="text" title="command" placeholder="help" id="gameLogCommand">
+                        </div>
+                        <button onclick="enterCommand()">Enter</button>
                     </div>
                 </div>
             </div>

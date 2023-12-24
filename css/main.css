@@ -87,3 +87,30 @@ button{
   color: black;
   cursor: pointer;
 }
+
+#hackedClientActivator{
+  cursor: pointer;
+}
+
+#gameLogsCommands{
+  width: 100%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: 100%;
+}
+#gameLogsCommands input{
+  width: 94%;
+  font-size: 20px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  color: white;
+}
+#gameLogsCommands button{
+  width: 100%;
+  font-size: 20px;
+  border-radius: 0;
+  padding: 0;
+}

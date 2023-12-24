@@ -64,6 +64,47 @@ function round(number) {
     return Math.round(number * 1000) / 1000;
 }
 
+//commands
+let inputProcess = [false, ""];
+const gameLogCommand = document.getElementById("gameLogCommand");
+function enterCommand() {
+    if (inputProcess[0] === false) {
+        switch (gameLogCommand.value) {
+            case "reload":
+                printNewLog("Reloading page in 3 seconds...");
+                setTimeout(function () { location.reload(); }, 3000);
+                break;
+            case "hack":
+                printNewLog("Loading hacked client...");
+                printNewLog("Please enter verification (password.)");
+                inputProcess = [true, "hack"];
+                break;
+            case "help":
+                printNewLog("Don't know what's going on? Using the debug console will render your run invalid for a competition!");
+                printNewLog("Commands: help, reload");
+                break;
+            case "3.14":
+                printNewLog(Math.PI);
+                break;
+            default:
+                printNewLog(gameLogCommand.value + "<-- Executed here and found an error! Exit: Command not found!");
+                break;
+        }
+    }
+    else if (inputProcess[1] === "hack"){
+        if (gameLogCommand.value === "open-sesame") {
+            hackedClient();
+        }
+    }
+}
+
+//hacked client
+function hackedClient() {
+    let hackedClient = true;
+    printNewLog("Hacked client loaded!");
+    document.title = "CRACKED: Online Business Simulator";
+}
+
 //actual game code
 let shiftTimeLeft = 5000;
 let working = false;
@@ -92,6 +133,15 @@ let staffPrices = {
 };
 
 let orderRespawnRate = 1000;
+
+function respawnOrder() {
+    if (orders < maxOrders) {
+        orders++;
+    }
+    setTimeout(respawnOrder, orderRespawnRate);
+    document.getElementById("ordersLeft").innerHTML = orders;
+}
+respawnOrder();
 
 const smallButtonWorkspace = document.getElementById("smallButtonWorkspace");
 
@@ -158,14 +208,6 @@ function work() {
     }
 }
 
-function respawnOrder() {
-    if (orders < maxOrders) {
-        orders++;
-    }
-    setTimeout(respawnOrder, orderRespawnRate);
-    document.getElementById("ordersLeft").innerHTML = orders;
-}
-respawnOrder();
 
 
 //hire staff/floor
@@ -204,6 +246,7 @@ function hireStaff() {
                     floors[i].staffNumber++;
                     printNewLog(`You hired a staff member! You now have ${floors[i].staffNumber} staff members on floor ${i}!`);
                     success = true;
+                    break;
                 }
                 else {
                     printNewLog("You don't have enough money to hire a staff member!");
@@ -212,10 +255,6 @@ function hireStaff() {
             }
             else { }
         }
-    }
-    if (success == false) {
-        // printNewLog("Error: LN188, COL1 main.js. Root: hireStaff(); Root two: ClickElement at LN61, COL38 at game.html. No resolution found. Error code: L188C1MAIN.JSL61C38GAME.HTML");
-        // printNewLog("Notice! This project is marked as 'beta' and is unfinished. Reporting the error will be beneficial to further development.");
     }
 
 }
