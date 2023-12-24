@@ -145,6 +145,9 @@ let floors = {
   numberFloors: 0,
 };
 
+let totalStaff = 0;
+let staffEarning = 1;
+
 let staffPrices = {
     staff: 10,
     floor: 500,
@@ -192,6 +195,11 @@ function startShift() {
 function countdown() {
     shiftTimeLeft -= 1000;
     smallButtonWorkspace.innerHTML = `${shiftTimeLeft / 1000}s left in shift!`;
+    if (orders >= 0 && orders - staffEarning * totalStaff >= 0) {
+        ordersSent += staffEarning * totalStaff;
+        orders -= staffEarning * totalStaff;
+    }
+    document.getElementById("ordersLeft").innerHTML = orders;
     if (shiftTimeLeft <= 0) {
         //earnings
         const earnings = round((1 - tax) * (ordersSent * earningsPerOrder));
@@ -262,6 +270,7 @@ function hireStaff() {
                     document.getElementById("staffPrice").innerHTML = staffPrices.staff;
                     document.getElementById("money").innerHTML = money;
                     floors[i].staffNumber++;
+                    totalStaff++;
                     printNewLog(`You hired a staff member! You now have ${floors[i].staffNumber} staff members on floor ${i}!`);
                     success = true;
                     break;
