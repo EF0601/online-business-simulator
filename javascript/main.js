@@ -75,16 +75,27 @@ function enterCommand() {
                 setTimeout(function () { location.reload(); }, 3000);
                 break;
             case "hack":
-                printNewLog("Loading hacked client...");
-                printNewLog("Please enter verification (password.)");
-                inputProcess = [true, "hack"];
+                if (hackedClientActivate == false) {
+                    printNewLog("Loading hacked client...");
+                    printNewLog("Please enter verification (password.)");
+                    inputProcess = [true, "hack"];
+                }
+                else{
+                    printNewLog("Hacked client already loaded!");
+                }
                 break;
             case "help":
                 printNewLog("Don't know what's going on? Using the debug console will render your run invalid for a competition!");
                 printNewLog("Commands: help, reload");
+                printNewLog("There's some easter eggs too ;)");
                 break;
             case "3.14":
                 printNewLog(Math.PI);
+                break;
+            case "u suck":
+                printNewLog("if ur talking about urself, thats tru");
+                money = -1000;
+                document.getElementById("money").innerHTML = money;
                 break;
             default:
                 printNewLog(gameLogCommand.value + "<-- Executed here and found an error! Exit: Command not found!");
@@ -94,13 +105,20 @@ function enterCommand() {
     else if (inputProcess[1] === "hack"){
         if (gameLogCommand.value === "open-sesame") {
             hackedClient();
+            inputProcess = [false, ""];
+        }
+        else{
+            printNewLog("Incorrect password.");
+            inputProcess = [false, ""];
         }
     }
+    gameLogCommand.value = "";
 }
 
 //hacked client
+let hackedClientActivate = false;
 function hackedClient() {
-    let hackedClient = true;
+    hackedClientActivate = true;
     printNewLog("Hacked client loaded!");
     document.title = "CRACKED: Online Business Simulator";
 }
