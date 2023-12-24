@@ -69,50 +69,108 @@ let inputProcess = [false, ""];
 const gameLogCommand = document.getElementById("gameLogCommand");
 function enterCommand() {
     if (inputProcess[0] === false) {
-        switch (gameLogCommand.value) {
-            case "reload":
-                printNewLog("Reloading page in 3 seconds...");
-                setTimeout(function () { location.reload(); }, 3000);
-                break;
-            case "hack":
-                if (hackedClientActivate == false) {
-                    printNewLog("Loading hacked client...");
-                    printNewLog("Please enter verification (password.)");
-                    inputProcess = [true, "hack"];
-                }
-                else{
-                    printNewLog("Hacked client already loaded!");
-                }
-                break;
-            case "help":
-                printNewLog("Don't know what's going on? Using the debug console will render your run invalid for a competition!");
-                printNewLog("Commands: help, reload");
-                printNewLog("There's some easter eggs too ;)");
-                break;
-            case "3.14":
-                printNewLog(Math.PI);
-                break;
-            case "u suck":
-                printNewLog("if ur talking about urself, thats tru");
-                money = -1000;
-                document.getElementById("money").innerHTML = money;
-                break;
-            default:
-                printNewLog(gameLogCommand.value + "<-- Executed here and found an error! Exit: Command not found!");
-                break;
+        //hacks
+        if ((gameLogCommand.value).split(" ")[0] == "hack" && hackedClientActivate == true && getParameter(gameLogCommand.value).length == 2) {
+            switch (getParameter(gameLogCommand.value)[0]) {
+                case "money":
+                    money = Number(getParameter(gameLogCommand.value)[1]);
+                    document.getElementById("money").innerHTML = money;
+                    break;
+                case "orders":
+                    orders = Number(getParameter(gameLogCommand.value)[1]);
+                    document.getElementById("ordersLeft").innerHTML = orders;
+                    break;
+                default:
+                    printNewLog(getParameter(gameLogCommand.value)[1] + "<-- found error here! Exit: Invalid parameter.");
+                    break;
+            }
+        }
+        //help menu
+        else if ((gameLogCommand.value).split(" ")[0] == "help" && getParameter(gameLogCommand.value).length == 1) {
+            switch (getParameter(gameLogCommand.value)[0]) {
+                case "hack":
+                    printNewLog("Hacks are only available on the hacked client. To access the hacked client, type 'hack' in the console and enter the password.");
+                    if (hackedClientActivate === true) {
+                        printNewLog("Command usage: hack [thing] [set to value]");
+                        printNewLog("Things: money, orders");
+                        printNewLog("Example: hack money 1000");
+                        printNewLog("This will set your money to 1000.");
+                    }
+                    break;
+                case "help":
+                    printNewLog("This will bring up the help menu. Enter parameters to learn more about each command.");
+                    printNewLog("Command usage: help [thing]");
+                    printNewLog("Example: help help");
+                    printNewLog("This will bring up the help menu for the help command.");
+                    break;
+                case "reload":
+                    printNewLog("This will reload the page in 3 seconds.");
+                    printNewLog("Command usage: reload");
+                    printNewLog("Example: reload");
+                    printNewLog("This will reload the page in 3 seconds.");
+                    break;
+                default:
+                    printNewLog(getParameter(gameLogCommand.value)[1] + "<-- found error here! Exit: Invalid parameter.");
+                    break;
+            }
+        }
+        //other commands
+        else {
+            switch (gameLogCommand.value) {
+                case "reload":
+                    printNewLog("Reloading page in 3 seconds...");
+                    setTimeout(function () { location.reload(); }, 3000);
+                    break;
+                case "hack":
+                    if (hackedClientActivate == false) {
+                        printNewLog("Loading hacked client...");
+                        printNewLog("Please enter verification (password.)");
+                        inputProcess = [true, "hack"];
+                    }
+                    break;
+                case "help":
+                    printNewLog("Don't know what's going on? Using the debug console will render your run invalid for a competition!");
+                    printNewLog("Commands: help, reload");
+                    printNewLog("Command usage: help [thing] to learn more about each command.");
+                    printNewLog("There's some easter eggs too ;)");
+                    break;
+                case "3.14":
+                    printNewLog(Math.PI);
+                    break;
+                case "u suck":
+                    printNewLog("if ur talking about urself, thats tru");
+                    money = -1000;
+                    document.getElementById("money").innerHTML = money;
+                    break;
+                default:
+                    printNewLog(gameLogCommand.value + "<-- Executed here and found an error! Exit: Command not found!");
+                    break;
+            }
         }
     }
-    else if (inputProcess[1] === "hack"){
+    else if (inputProcess[1] === "hack") {
         if (gameLogCommand.value === "open-sesame") {
             hackedClient();
             inputProcess = [false, ""];
         }
-        else{
+        else {
             printNewLog("Incorrect password.");
             inputProcess = [false, ""];
         }
     }
     gameLogCommand.value = "";
+}
+
+function getParameter(parameter) {
+    const inputParameter = parameter.split(" ");
+    let outputParameters = [];
+    for (let i = 1; i < inputParameter.length; i++) {
+        if (inputParameter[i] !== "") {
+            outputParameters.push(inputParameter[i]);
+        }
+    }
+    console.log(outputParameters);
+    return outputParameters;
 }
 
 //hacked client
@@ -142,7 +200,7 @@ let level = 1;
 
 //staff
 let floors = {
-  numberFloors: 0,
+    numberFloors: 0,
 };
 
 let totalStaff = 0;
@@ -238,28 +296,28 @@ function work() {
 
 //hire staff/floor
 function buildFloor() {
-    if(money >= staffPrices.floor) {
+    if (money >= staffPrices.floor) {
         money -= staffPrices.floor;
         floors.numberFloors++;
         staffPrices.floor = Math.round(staffPrices.floor * 1.5);
         document.getElementById("floorPrice").innerHTML = staffPrices.floor;
         document.getElementById("money").innerHTML = money;
-        floors[floors.numberFloors] = {staffNumber: 0, staffMax: 4, upgrade: 0, upgradeMax: 5};
+        floors[floors.numberFloors] = { staffNumber: 0, staffMax: 4, upgrade: 0, upgradeMax: 5 };
         console.log(floors);
         printNewLog(`You bought a floor! You now have ${floors.numberFloors} floors!`);
     }
-    else{
+    else {
         printNewLog("You don't have enough money to buy another floor!");
     }
 }
 
 function hireStaff() {
     let success = false;
-    if (floors == {numberFloors: 0}) {
+    if (floors == { numberFloors: 0 }) {
         printNewLog("You don't have any floors! Buy a floor first!");
         success = true;
     }
-    else{
+    else {
         for (let i = 1; i <= floors.numberFloors; i++) {
             console.log(i);
             console.log(floors[i]);
