@@ -67,6 +67,25 @@ function round(number) {
 //commands
 let inputProcess = [false, ""];
 const gameLogCommand = document.getElementById("gameLogCommand");
+
+//keybind
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Enter") {
+        enterCommand();
+    }
+    if (event.key === "/") {
+        gameLogCommand.focus();
+        setTimeout(function () { gameLogCommand.value = "" }, 2);
+    }
+    if (event.key === "Escape") {
+        gameLogCommand.blur();
+    }
+    if (event.key === "Backspace") {
+        gameLogCommand.value = "";
+    }
+    console.log(event.key);
+});
+
 function enterCommand() {
     if (inputProcess[0] === false) {
         //hacks
