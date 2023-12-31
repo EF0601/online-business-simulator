@@ -398,17 +398,17 @@ let upgrades = {
     earningsPerOrder: {
         level: 0,
         effect: 2,
-        cost: 100,
+        cost: 109,
     },
     staffBoost: {
         level: 0,
         effect: 0.01,
-        cost: 100,
+        cost: 545,
     },
     taxRelief: {
         level: 0,
         effect: 0.01,
-        cost: 1000,
+        cost: 1090,
     },
 };
 
@@ -420,14 +420,14 @@ function upgrade(upgradedThing) {
                 money -= upgrades.earningsPerOrder.cost;
                 upgradeLocations.earningsPerOrder.earningsPreviousLevel.innerHTML = upgrades.earningsPerOrder.level;
                 upgradeLocations.earningsPerOrder.earningsPreviousCost.innerHTML = upgrades.earningsPerOrder.cost;
-                upgrades.earningsPerOrder.cost = Number(Math.round(upgrades.earningsPerOrder.cost * 1.09).toFixed(2));
+                upgrades.earningsPerOrder.cost = Number(Math.round(upgrades.earningsPerOrder.cost * 1.09 * 1.09).toFixed(2));
                 earningsPerOrder = Number(round(earningsPerOrder * (1.1)).toFixed(2));
                 upgradeLocations.earningsPerOrder.earningPreviousEffect.innerHTML = earningsPerOrder;
                 document.getElementById("money").innerHTML = money;
                 upgradeLocations.earningsPerOrder.earningsNextLevel.innerHTML = upgrades.earningsPerOrder.level + 1;
                 upgradeLocations.earningsPerOrder.earningsNextEffect.innerHTML = Number(round(earningsPerOrder * (1.1)).toFixed(2));
-                upgradeLocations.earningsPerOrder.earningsNextCost.innerHTML = upgrades.earningsPerOrder.cost;
-                upgradeLocations.earningsPerOrder.earningsTotalCost.innerHTML = Number((upgrades.earningsPerOrder.cost * 1.09).toFixed(2));
+                upgradeLocations.earningsPerOrder.earningsNextCost.innerHTML = Number((upgrades.earningsPerOrder.cost) / 1.09).toFixed(2);
+                upgradeLocations.earningsPerOrder.earningsTotalCost.innerHTML = Number((upgrades.earningsPerOrder.cost).toFixed(2));
                 printNewLog(`You upgraded your earnings per order! You now earn $${earningsPerOrder} per order!`);
 
             }
@@ -435,7 +435,27 @@ function upgrade(upgradedThing) {
                 printNewLog("You don't have enough money to buy this upgrade!");
             }
             break;
+        case 'staffBoost':
+            if (money >= upgrades.staffBoost.cost) {
+                upgrades.staffBoost.level++;
+                money -= upgrades.staffBoost.cost;
+                upgradeLocations.staffBoost.staffBoostPreviousLevel.innerHTML = upgrades.staffBoost.level;
+                upgradeLocations.staffBoost.staffBoostPreviousCost.innerHTML = upgrades.staffBoost.cost;
+                upgrades.staffBoost.cost = Number(Math.round(upgrades.staffBoost.cost * 1.39 * 1.09).toFixed(2));
+                staffEarning++;
+                upgradeLocations.staffBoost.staffBoostPreviousEffect.innerHTML = staffEarning;
+                document.getElementById("money").innerHTML = money;
+                upgradeLocations.staffBoost.staffBoostNextLevel.innerHTML = upgrades.staffBoost.level + 1;
+                upgradeLocations.staffBoost.staffBoostNextEffect.innerHTML = staffEarning + 1;
+                upgradeLocations.staffBoost.staffBoostNextCost.innerHTML = Number(upgrades.staffBoost.cost / 1.09).toFixed(2);
+                upgradeLocations.staffBoost.staffBoostTotalCost.innerHTML = Number((upgrades.staffBoost.cost).toFixed(2));
+                printNewLog(`You upgraded your staff boost! Staff now processes ${staffEarning} orders per second per staff!`);
 
+            }
+            else {
+                printNewLog("You don't have enough money to buy this upgrade!");
+            }
+            break;
         default:
             break;
     }
