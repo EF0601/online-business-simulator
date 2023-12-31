@@ -234,7 +234,8 @@ function gainedExperience() {
         maxExperience = Math.round(maxExperience * 1.5);
         document.getElementById("experience").innerHTML = round(experience);
         document.getElementById("experienceNeeded").innerHTML = Math.round(maxExperience);
-        printNewLog(`You leveled up! You are now level ${level}!`);
+        earningsPerOrder = Number(round(earningsPerOrder * 1.02).toFixed(2));
+        printNewLog(`You leveled up! You are now level ${level}! You now earn $${earningsPerOrder} per order!`);
     }
 }
 
@@ -260,9 +261,9 @@ function countdown() {
     document.getElementById("ordersLeft").innerHTML = orders;
     if (shiftTimeLeft <= 0) {
         //earnings
-        const earnings = round((1 - tax) * (ordersSent * earningsPerOrder));
+        const earnings = Number(round((1 - tax) * (ordersSent * earningsPerOrder)).toFixed(2));
         money += earnings;
-        printNewLog(`You earned $${earnings}! This is calculated as: tax: ${tax * 100}%; orders sent: ${ordersSent}; earnings per order: ${earningsPerOrder}; Gross earnings: ${round(earningsPerOrder * ordersSent)}; Tax cost: ${round((earningsPerOrder * ordersSent) * tax)}; Total earnings: ${earnings}; You now have $${money}.`);
+        printNewLog(`You earned $${earnings}! This is calculated as: tax: ${tax * 100}%; orders sent: ${ordersSent}; earnings per order: ${earningsPerOrder}; Gross earnings: ${Number(round(earningsPerOrder * ordersSent).toFixed(2))}; Tax cost: ${Number(round((earningsPerOrder * ordersSent) * tax).toFixed(2))}; Total earnings: ${earnings}; You now have $${money}.`);
         document.getElementById("money").innerHTML = money;
         //reset
         smallButtonWorkspace.disabled = false;
@@ -353,7 +354,7 @@ const upgradeLocations = {
         earningsNextLevel: document.getElementById("earningsNextLevel"),
         earningsNextEffect: document.getElementById("earningsNextEffect"),
         earningsNextCost: document.getElementById("earningsNextCost"),
-        earningsTotalCost: document.getElementById("earningsTotalCost"),
+        earningsTotalCost: document.getElementById("earningsTotalPrice"),
     },
     staffBoost: {
         staffBoostPreviousLevel: document.getElementById("staffBoostPreviousLevel"),
@@ -362,7 +363,7 @@ const upgradeLocations = {
         staffBoostNextLevel: document.getElementById("staffBoostNextLevel"),
         staffBoostNextEffect: document.getElementById("staffBoostNextEffect"),
         staffBoostNextCost: document.getElementById("staffBoostNextCost"),
-        staffBoostTotalCost: document.getElementById("staffBoostTotalCost"),
+        staffBoostTotalCost: document.getElementById("staffBoostTotalPrice"),
     },
     taxRelief: {
         taxReliefPreviousLevel: document.getElementById("taxReliefPreviousLevel"),
@@ -371,6 +372,52 @@ const upgradeLocations = {
         taxReliefNextLevel: document.getElementById("taxReliefNextLevel"),
         taxReliefNextEffect: document.getElementById("taxReliefNextEffect"),
         taxReliefNextCost: document.getElementById("taxReliefNextCost"),
-        taxReliefTotalCost: document.getElementById("taxReliefTotalCost"),
+        taxReliefTotalCost: document.getElementById("taxReliefTotalPrice"),
     },
 };
+let upgrades = {
+    earningsPerOrder: {
+        level: 0,
+        effect: 2,
+        cost: 100,
+    },
+    staffBoost: {
+        level: 0,
+        effect: 0.01,
+        cost: 100,
+    },
+    taxRelief: {
+        level: 0,
+        effect: 0.01,
+        cost: 1000,
+    },
+};
+
+function upgrade(upgradedThing) {
+    switch (upgradedThing) {
+        case 'earnings':
+            if (money >= upgrades.earningsPerOrder.cost) {
+                upgrades.earningsPerOrder.level++;
+                money -= upgrades.earningsPerOrder.cost;
+                upgradeLocations.earningsPerOrder.earningsPreviousLevel.innerHTML = upgrades.earningsPerOrder.level;
+                upgradeLocations.earningsPerOrder.earningsPreviousCost.innerHTML = upgrades.earningsPerOrder.cost;
+                upgrades.earningsPerOrder.cost = Number(Math.round(upgrades.earningsPerOrder.cost * 1.09).toFixed(2));
+                earningsPerOrder = Number(round(earningsPerOrder * (1.1)).toFixed(2));
+                upgradeLocations.earningsPerOrder.earningPreviousEffect.innerHTML = earningsPerOrder;
+                document.getElementById("money").innerHTML = money;
+                upgradeLocations.earningsPerOrder.earningsNextLevel.innerHTML = upgrades.earningsPerOrder.level + 1;
+                upgradeLocations.earningsPerOrder.earningsNextEffect.innerHTML = Number(round(earningsPerOrder * (1.1)).toFixed(2));
+                upgradeLocations.earningsPerOrder.earningsNextCost.innerHTML = upgrades.earningsPerOrder.cost;
+                upgradeLocations.earningsPerOrder.earningsTotalCost.innerHTML = Number((upgrades.earningsPerOrder.cost * 1.09).toFixed(2));
+                printNewLog(`You upgraded your earnings per order! You now earn $${earningsPerOrder} per order!`);
+
+            }
+            else {
+                printNewLog("You don't have enough money to buy this upgrade!");
+            }
+            break;
+
+        default:
+            break;
+    }
+}

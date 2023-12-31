@@ -108,17 +108,17 @@
                                 <div class="doubleColumn">
                                     <div class="container">
                                         <h3>Level <span id="earningsPreviousLevel">0</span></h3>
-                                        <p>Earnings/click increase boost: <span id="earningPreviousEffect">0</span>%</p>
+                                        <p>Earnings/click $<span id="earningsPreviousEffect">2</span></p>
                                         <p>Price: $<span id="earningsPreviousCost">0</span></p>
                                     </div>
                                     <div class="container">
                                         <h3>Level <span id="earningsNextLevel">1</span></h3>
-                                        <p>Earnings/click increase boost: <span id="earningsNextEffect">1</span>%</p>
+                                        <p>Earnings/click $<span id="earningsNextEffect">2.2</span></p>
                                         <p>Price: $<span id="earningsNextCost">100</span></p>
                                     </div>
                                 </div>
                             </td>
-                            <td>You pay: $<span id="earningsTotalPrice">109</span> <button>Buy</button></td>
+                            <td>You pay: $<span id="earningsTotalPrice">109</span> <button onclick="upgrade('earnings')">Buy</button></td>
                         </tr>
                         <tr>
                             <td>Additional staff earnings boost</td>
@@ -136,7 +136,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>You pay: $<span id="staffBoostTotalPrice">109</span> <button>Buy</button></td>
+                            <td>You pay: $<span id="staffBoostTotalPrice">109</span> <button onclick="upgrade('staffBoost')">Buy</button></td>
                         </tr>
                         <tr>
                             <td>Basic Tax Relief (for earnings only)</td>
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>You pay: $<span id="taxReliefTotalCost">1090</span><button>Buy</button></td>
+                            <td>You pay: $<span id="taxReliefTotalCost">1090</span><button onclick="upgrade('taxRelief')">Buy</button></td>
                         </tr>
                     </table>
 
