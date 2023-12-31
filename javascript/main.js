@@ -343,3 +343,34 @@ function hireStaff() {
     }
 
 }
+
+//upgrades
+const upgradeLocations = {
+    earningsPerOrder: {
+        earningsPreviousLevel: document.getElementById("earningsPreviousLevel"),
+        earningPreviousEffect: document.getElementById("earningsPreviousEffect"),
+        earningsPreviousCost: document.getElementById("earningsPreviousCost"),
+        earningsNextLevel: document.getElementById("earningsNextLevel"),
+        earningsNextEffect: document.getElementById("earningsNextEffect"),
+        earningsNextCost: document.getElementById("earningsNextCost"),
+        earningsTotalCost: document.getElementById("earningsTotalCost"),
+    },
+    staffBoost: {
+        staffBoostPreviousLevel: document.getElementById("staffBoostPreviousLevel"),
+        staffBoostPreviousEffect: document.getElementById("staffBoostPreviousEffect"),
+        staffBoostPreviousCost: document.getElementById("staffBoostPreviousCost"),
+        staffBoostNextLevel: document.getElementById("staffBoostNextLevel"),
+        staffBoostNextEffect: document.getElementById("staffBoostNextEffect"),
+        staffBoostNextCost: document.getElementById("staffBoostNextCost"),
+        staffBoostTotalCost: document.getElementById("staffBoostTotalCost"),
+    },
+    taxRelief: {
+        taxReliefPreviousLevel: document.getElementById("taxReliefPreviousLevel"),
+        taxReliefPreviousEffect: document.getElementById("taxReliefPreviousEffect"),
+        taxReliefPreviousCost: document.getElementById("taxReliefPreviousCost"),
+        taxReliefNextLevel: document.getElementById("taxReliefNextLevel"),
+        taxReliefNextEffect: document.getElementById("taxReliefNextEffect"),
+        taxReliefNextCost: document.getElementById("taxReliefNextCost"),
+        taxReliefTotalCost: document.getElementById("taxReliefTotalCost"),
+    },
+};
