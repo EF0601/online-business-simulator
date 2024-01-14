@@ -6,6 +6,10 @@
 html {
   background-color: black;
   user-select: none;
+  font-family: 'Poppins', sans-serif;
+}
+button,input{
+  font-family: 'Poppins', sans-serif;
 }
 #doubleBar {
   display: grid;

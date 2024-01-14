@@ -17,10 +17,9 @@ printNewLog("Loading window...");
 printNewLog("Don't worry. Shouldn't take long.");
 window.onload = function () {
     printNewLog("Loaded window!");
-    printNewLog("1/1 assets loaded! Initiating game...");
-    printNewLog("Game initiated!");
-    printNewLog("Game started!");
+    printNewLog("3/3 assets loaded");
 };
+
 document.getElementById("enableTutorial").addEventListener("click", function () {
     tutorial(1);
 });
@@ -75,7 +74,7 @@ document.addEventListener('keydown', function (event) {
     }
     if (event.key === "/") {
         gameLogCommand.focus();
-        setTimeout(function () { gameLogCommand.value = "" }, 2);
+        setTimeout(function () { gameLogCommand.value = ""; }, 2);
     }
     if (event.key === "Escape") {
         gameLogCommand.blur();
@@ -160,6 +159,12 @@ function enterCommand() {
                     printNewLog("if ur talking about urself, thats tru");
                     money = -1000;
                     document.getElementById("money").innerHTML = money;
+                    break;
+                case "credits":
+                    printNewLog("Credits:");
+                    printNewLog("Developer: @EF0601 on GitHub");
+                    printNewLog("Sounds by Pixabay");
+                    printNewLog("Legacy music by Pixabay");
                     break;
                 default:
                     printNewLog(gameLogCommand.value + "<-- Executed here and found an error! Exit: Command not found!");

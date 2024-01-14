@@ -7,6 +7,7 @@
     <title>Online Business Simulator</title>
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/modal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,6 +21,7 @@
             <div>
                 <button id="enableTutorial" onclick="closeModal()">I'd like to view the tutorial</button>
                 <button onclick="closeModal()">I'm a veteran: no need!</button>
+                <button onclick="enableSound()">Enable sound (Option in-game as well.)</button>
             </div>
         </div>
 
@@ -52,6 +54,7 @@
                         </div>
                         <button onclick="enterCommand()">Enter</button>
                     </div>
+                    <button onclick="toggleSound()">Enable/disable Sound</button>
                 </div>
             </div>
             <div class="bar">
@@ -166,4 +169,5 @@
 </body>
 <script src="./javascript/main.js"></script>
 <script src="./javascript/modal.js"></script>
+<script src="./audio.js"></script>
 </html>
